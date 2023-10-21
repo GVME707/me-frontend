@@ -4,6 +4,7 @@ function App() {
   const [users, setUsers] = useState([]);
 
   useEffect(() => {
+    console.log(import.meta.env.VITE_API);
     fetch(import.meta.env.VITE_API + "/users")
       .then((response) => {
         if (!response.ok) {
