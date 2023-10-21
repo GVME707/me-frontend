@@ -5,8 +5,19 @@ function App() {
 
   useEffect(() => {
     fetch(import.meta.env.VITE_API + "/users")
-      .then((response) => response.json())
-      .then((json) => setUsers(json));
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error("Network response was not ok " + response.statusText);
+        }
+        return response.json();
+      })
+      .then((json) => setUsers(json))
+      .catch((error) => {
+        console.error(
+          "There has been a problem with your fetch operation:",
+          error
+        );
+      });
   }, []);
 
   return (
